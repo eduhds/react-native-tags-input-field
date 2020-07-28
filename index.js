@@ -12,11 +12,15 @@ export default function TagsInputField({
     onChangeTags,
     containerStyle,
     inputStyle,
-    removeIcon
+    removeIcon,
+    label,
+    labelStyle,
+    inputProps
 }) {
     const [text, setText] = useState('');
     return (
         <View style={[Styles.container, containerStyle]}>
+            {label ? <Text style={labelStyle}>{label}</Text> : []}
             <View
                 style={{
                     flex: 1,
@@ -36,6 +40,7 @@ export default function TagsInputField({
                     </TouchableOpacity>
                 ))}
                 <TextInput
+                    {...inputProps}
                     style={[Styles.input, inputStyle]}
                     value={text}
                     onChangeText={_text => {
