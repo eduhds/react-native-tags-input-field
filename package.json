@@ -1,0 +1,19 @@
+{
+  "name": "react-native-tags-input-field",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo Test"
+  },
+  "keywords": [
+    "react",
+    "native",
+    "tags",
+    "input",
+    "field",
+    "tag"
+  ],
+  "author": "Eduardo Henrique",
+  "license": "MIT"
+}
