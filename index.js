@@ -7,7 +7,7 @@ import {
     StyleSheet
 } from 'react-native';
 
-export default function TagInputField({
+export default function TagsInputField({
     tags,
     onChangeTags,
     containerStyle,
