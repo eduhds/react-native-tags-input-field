@@ -54,7 +54,8 @@ export default function TagsInputField({
                                 setText(_text.trim());
                             }
                         } else {
-                            setText(_text.trim());
+                            if (separator) setText(_text.trim());
+                            else setText(_text);
                         }
                     }}
                     onKeyPress={({ nativeEvent }) => {
