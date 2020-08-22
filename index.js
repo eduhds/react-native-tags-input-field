@@ -46,15 +46,20 @@ export default function TagsInputField({
                     value={text}
                     onChangeText={_text => {
                         if (parseWhen(_text, separator)) {
-                            if (tags.indexOf(_text.trim()) === -1) {
+                            if (
+                                tags.indexOf(
+                                    _text.trim().replace(separator || '', '')
+                                ) === -1
+                            ) {
                                 let newTags = [...tags, text.trim()];
                                 onChangeTags(newTags);
                                 setText('');
                             } else {
-                                setText(_text.trim());
+                                if (!separator) setText(_text.trim());
+                                else setText(_text.replace(separator, ''));
                             }
                         } else {
-                            if (separator) setText(_text.trim());
+                            if (!separator) setText(_text.trim());
                             else setText(_text);
                         }
                     }}
