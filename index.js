@@ -15,7 +15,8 @@ export default function TagsInputField({
     removeIcon,
     label,
     labelStyle,
-    inputProps
+    inputProps,
+    separator
 }) {
     const [text, setText] = useState('');
     return (
@@ -44,7 +45,7 @@ export default function TagsInputField({
                     style={[Styles.input, inputStyle]}
                     value={text}
                     onChangeText={_text => {
-                        if (parseWhen(_text)) {
+                        if (parseWhen(_text, separator)) {
                             if (tags.indexOf(_text.trim()) === -1) {
                                 let newTags = [...tags, text.trim()];
                                 onChangeTags(newTags);
@@ -73,8 +74,9 @@ export default function TagsInputField({
     );
 }
 
-const parseWhen = text => {
-    return [' ', ',', ';', '\n'].indexOf(text.charAt(text.length - 1)) !== -1;
+const parseWhen = (text, separator) => {
+    separator = separator ? [separator] : [' ', ',', ';', '\n'];
+    return separator.indexOf(text.charAt(text.length - 1)) !== -1;
 };
 
 const RemoveIcon = () => (
