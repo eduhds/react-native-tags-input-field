@@ -39,7 +39,7 @@ export default function TagsInputField({
                         }
                         style={Styles.tag}>
                         <Text style={{ fontSize: 16 }}>{item}</Text>
-                        {removeIcon || <RemoveIcon />}
+                        {editable && <>{removeIcon || <RemoveIcon />}</>}
                     </TouchableOpacity>
                 ))}
                 {editable && (
