@@ -33,6 +33,7 @@ export default function TagsInputField({
                 {tags.map((item, index) => (
                     <TouchableOpacity
                         key={index}
+                        disabled={!editable}
                         onPress={() =>
                             onChangeTags(tags.filter(t => t !== item))
                         }
