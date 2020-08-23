@@ -22,7 +22,7 @@ export default function TagsInputField({
     const [text, setText] = useState('');
     return (
         <View style={[Styles.container, containerStyle]}>
-            {label ? <Text style={labelStyle}>{label}</Text> : []}
+            {label && editable ? <Text style={labelStyle}>{label}</Text> : []}
             <View
                 style={{
                     flex: 1,
