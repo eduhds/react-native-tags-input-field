@@ -16,7 +16,8 @@ export default function TagsInputField({
     label,
     labelStyle,
     inputProps,
-    separator
+    separator,
+    editable = true
 }) {
     const [text, setText] = useState('');
     return (
@@ -40,41 +41,47 @@ export default function TagsInputField({
                         {removeIcon || <RemoveIcon />}
                     </TouchableOpacity>
                 ))}
-                <TextInput
-                    {...inputProps}
-                    style={[Styles.input, inputStyle]}
-                    value={text}
-                    onChangeText={_text => {
-                        if (parseWhen(_text, separator)) {
-                            if (
-                                tags.indexOf(
-                                    _text.trim().replace(separator || '', '')
-                                ) === -1
-                            ) {
-                                let newTags = [...tags, text.trim()];
-                                onChangeTags(newTags);
-                                setText('');
+                {editable && (
+                    <TextInput
+                        {...inputProps}
+                        style={[Styles.input, inputStyle]}
+                        value={text}
+                        onChangeText={_text => {
+                            if (parseWhen(_text, separator)) {
+                                if (
+                                    tags.indexOf(
+                                        _text
+                                            .trim()
+                                            .replace(separator || '', '')
+                                    ) === -1
+                                ) {
+                                    let newTags = [...tags, text.trim()];
+                                    onChangeTags(newTags);
+                                    setText('');
+                                } else {
+                                    if (!separator) setText(_text.trim());
+                                    else setText(_text.replace(separator, ''));
+                                }
                             } else {
                                 if (!separator) setText(_text.trim());
-                                else setText(_text.replace(separator, ''));
+                                else setText(_text);
                             }
-                        } else {
-                            if (!separator) setText(_text.trim());
-                            else setText(_text);
-                        }
-                    }}
-                    onKeyPress={({ nativeEvent }) => {
-                        if (
-                            !text &&
-                            nativeEvent.key === 'Backspace' &&
-                            tags.length > 0
-                        ) {
-                            onChangeTags(
-                                tags.filter(t => t !== tags[tags.length - 1])
-                            );
-                        }
-                    }}
-                />
+                        }}
+                        onKeyPress={({ nativeEvent }) => {
+                            if (
+                                !text &&
+                                nativeEvent.key === 'Backspace' &&
+                                tags.length > 0
+                            ) {
+                                onChangeTags(
+                                    tags.filter(
+                                        t => t !== tags[tags.length - 1]
+                                    )
+                                );
+                            }
+                        }}
+                    />
+                )}
             </View>
         </View>
     );
